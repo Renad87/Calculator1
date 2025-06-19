@@ -1,1 +1,141 @@
-add index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+    <style>
+    #Calculator{
+display: flex;
+flex-direction: column;
+background-color: rgb(56, 15, 36);
+width: fit-content;
+padding: 20px;
+align-items: center;
+border-radius: 20px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+margin: 10px auto;
+}
+#Calculator_display{
+    background-color: rgb(222, 218, 218);
+    height: 100px;
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    font-size: 36px;
+    box-sizing: border-box;
+    text-align: center;
+}
+.Calculator_row{
+margin: 5px auto;
+grid-template-columns: repeat(4, 1fr);
+gap: 10px;
+text-align: center;
+}
+.Calculator_row button{
+width: 60px;
+height: 60px;
+font-size: 20px;
+border: none;
+border-radius: 10px;
+margin: 5px ;
+background-color: rgb(167, 36, 106);
+color: white;
+transition: transform 0.7s, background-color 2.3s;
+cursor: pointer;
+box-shadow: 0 4px 6px rgba(o, 0, 0, 0.1);
+
+}
+.Calculator_row button:hover{
+background-color: rgb(117, 26, 71);
+cursor: pointer;
+transform: scale(1.110);
+}
+.Calculator_row button:active{
+transform: scale(0.99);
+background-color: rgb(25, 3, 14);
+}
+    </style>
+    
+</head>
+<body>
+<div id="Calculator">
+    <div id="Calculator_display"></div>
+<div class="Calculator_row">
+    <button>C</button>
+    <button>(</button>
+    <button>)</button>
+    <button>/</button>
+</div>
+<div class="Calculator_row">
+    <button>7</button>
+    <button>8</button>
+    <button>9</button>
+    <button>*</button>
+</div>
+<div class="Calculator_row">
+    <button>4</button>
+    <button>5</button>
+    <button>6</button>
+    <button>-</button>
+</div>
+<div class="Calculator_row">
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+    <button>+</button>
+</div>
+<div class="Calculator_row">
+    <button>DEL</button>
+    <button>0</button>
+    <button>.</button>
+    <button>=</button>
+</div>
+</div>
+<script>
+const Calculator = document.getElementById('Calculator');
+const Calculator_display = document.getElementById('Calculator_display');
+
+Calculator.addEventListener('click', e=> {
+if(e.target.nodeName === "BUTTON"){
+switch(e.target.textContent) {
+case "C":
+clear();
+break;
+case "DEL":
+deleteOneValue();
+break;
+case "=":
+evaluate();
+break;
+default:
+addToCalculator_display(e.target.textContent);
+
+
+
+
+}}});
+
+function clear(){
+    Calculator_display.textContent = '';
+}
+
+function addToCalculator_display(value) {
+    Calculator_display.textContent = Calculator_display.textContent + value;
+}
+function deleteOneValue() {
+    Calculator_display.textContent = Calculator_display.textContent.slice(0, -1);
+}
+function evaluate() {
+    try {
+        let calcuation = eval(Calculator_display.textContent);
+        Calculator_display.textContent = calcuation;
+    } catch (error) {
+        Calculator_display.textContent = "Invalid Operation";
+        console.error( error);
+    }}
+</script>
+</body>
+</html>
